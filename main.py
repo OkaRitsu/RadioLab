@@ -29,7 +29,9 @@ print(f"Transcription completed in {int(hours):02}:{int(minutes):02}:{int(second
 # Save the transcription to a file
 os.makedirs(args.output_dir, exist_ok=True)
 filename = os.path.splitext(os.path.basename(args.audio))[0]
-with open(os.path.join(args.output_dir, f"{filename}.txt"), "w") as f:
+with open(os.path.join(args.output_dir, f"{filename}.txt"), "w", encoding="utf-8") as f:
     f.write(result["text"])
-with open(os.path.join(args.output_dir, f"{filename}.json"), "w") as f:
-    json.dump(result["segments"], f, indent=4)
+with open(
+    os.path.join(args.output_dir, f"{filename}.json"), "w", encoding="utf-8"
+) as f:
+    json.dump(result["segments"], f, indent=4, ensure_ascii=False)
